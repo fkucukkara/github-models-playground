@@ -4,3 +4,6 @@ GET {{ApiService_HostAddress}}/summarize?slug=whats-new/aspire-13/
 Accept: application/json
 
 ###
+
+GET {{ApiService_HostAddress}}/health
+Accept: application/json
