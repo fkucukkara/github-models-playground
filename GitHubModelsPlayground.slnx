@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".gitignore" />
+    <File Path="LICENSE" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src\GitHubModelsPlayground.ApiService\GitHubModelsPlayground.ApiService.csproj" />
+    <Project Path="src\GitHubModelsPlayground.AppHost\GitHubModelsPlayground.AppHost.csproj" />
+    <Project Path="src\GitHubModelsPlayground.ServiceDefaults\GitHubModelsPlayground.ServiceDefaults.csproj" />
+  </Folder>
+</Solution>

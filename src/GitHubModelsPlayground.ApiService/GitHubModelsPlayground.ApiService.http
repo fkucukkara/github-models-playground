@@ -1,0 +1,6 @@
+@ApiService_HostAddress = http://localhost:5575
+
+GET {{ApiService_HostAddress}}/summarize?slug=whats-new/aspire-13/
+Accept: application/json
+
+###
