@@ -1,4 +1,5 @@
 using GitHubModelsPlayground.ApiService;
+using Microsoft.Extensions.AI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +29,7 @@ builder.Services.AddScoped<IBlogSummarizer, BlogSummarizer>();
 
 var app = builder.Build();
 app.UseExceptionHandler();
+app.UseStatusCodePages();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
@@ -50,8 +52,37 @@ app.MapGet("/summarize", async (string slug, IBlogService blogService, IBlogSumm
         logger.LogError(ex, "Error summarizing blog content for slug '{Slug}'", slug);
         return Results.Problem("Failed to summarize the blog content.");
     }
-}).WithName("SummarizeContent");
+}).WithName("SummarizeContent")
+  .WithSummary("Summarize blog content from aspire.dev")
+  .WithDescription("Fetches a blog post from aspire.dev using the provided slug, extracts the first paragraph, " +
+  "and generates a two-sentence AI summary using GitHub Models (GPT-4o-mini).");
+
+app.MapPost("/chat", async (ChatRequest request, IChatClient chatClient, ILogger<Program> logger) =>
+{
+    try
+    {
+        // Send the user's message directly to the AI chat client
+        var chatResponse = await chatClient.GetResponseAsync(request.Message);
+
+        var responseText = chatResponse.Messages.FirstOrDefault()?.Text ?? "No response generated.";
+
+        return Results.Ok(new { response = responseText });
+    }
+    catch (Exception ex)
+    {
+        logger.LogError(ex, "Error processing chat message");
+        return Results.Problem("Failed to process the chat message.");
+    }
+}).WithName("Chat")
+  .WithSummary("Send a message to the AI chat client")
+  .WithDescription("Sends a message to the GitHub Models AI (GPT-4o-mini) and returns the response.");
 
 app.MapDefaultEndpoints();
 
 app.Run();
+
+/// <summary>
+/// Request model for the chat endpoint.
+/// </summary>
+/// <param name="Message">The message to send to the AI chat client.</param>
+public record ChatRequest(string Message);

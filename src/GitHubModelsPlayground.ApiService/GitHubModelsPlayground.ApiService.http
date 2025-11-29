@@ -5,5 +5,14 @@ Accept: application/json
 
 ###
 
+POST {{ApiService_HostAddress}}/chat
+Content-Type: application/json
+
+{
+  "message": "Hello, what can you tell me about .NET Aspire?"
+}
+
+###
+
 GET {{ApiService_HostAddress}}/health
 Accept: application/json
