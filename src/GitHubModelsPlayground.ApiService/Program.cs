@@ -53,7 +53,6 @@ app.MapGet("/summarize", async (string slug, BlogService blogService, BlogSummar
     }
     catch (Exception ex)
     {
-        // Log the error with structured logging for observability
         logger.LogError(ex, "Error summarizing blog content for slug '{Slug}'", slug);
         return Results.Problem("Failed to summarize the blog content.");
     }
