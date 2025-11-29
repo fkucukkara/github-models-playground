@@ -10,7 +10,7 @@ builder.Services.AddOpenApi();
 
 // Register the BlogService with a configured HttpClient
 // The base address is a placeholder that will be resolved by Aspire's service discovery
-builder.Services.AddHttpClient<BlogService>(client =>
+builder.Services.AddHttpClient<IBlogService, BlogService>(client =>
 {
     // The base address is set to a placeholder;
     // the actual URL will be provided by the AppHost at runtime.
@@ -24,22 +24,16 @@ builder.AddAzureChatCompletionsClient("ai-model")
     .AddChatClient();
 
 // Register the BlogSummarizer service for dependency injection
-builder.Services.AddScoped<BlogSummarizer>();
+builder.Services.AddScoped<IBlogSummarizer, BlogSummarizer>();
 
 var app = builder.Build();
-
-// Add global exception handling middleware
 app.UseExceptionHandler();
-
-// Enable OpenAPI/Swagger in development environment for testing
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
 
-// Define the /summarize endpoint using minimal API syntax
-// This endpoint fetches blog content and generates an AI-powered summary
-app.MapGet("/summarize", async (string slug, BlogService blogService, BlogSummarizer blogSummarizer, ILogger<Program> logger) =>
+app.MapGet("/summarize", async (string slug, IBlogService blogService, IBlogSummarizer blogSummarizer, ILogger<Program> logger) =>
 {
     try
     {
@@ -56,9 +50,8 @@ app.MapGet("/summarize", async (string slug, BlogService blogService, BlogSummar
         logger.LogError(ex, "Error summarizing blog content for slug '{Slug}'", slug);
         return Results.Problem("Failed to summarize the blog content.");
     }
-}).WithName("SummarizeBlogContent");
+}).WithName("SummarizeContent");
 
-// Map default Aspire endpoints (health checks, metrics)
 app.MapDefaultEndpoints();
 
 app.Run();

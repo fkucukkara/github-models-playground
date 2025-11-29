@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 /// Service for fetching and parsing blog content from external sources.
 /// </summary>
 /// <param name="httpClient">The HTTP client used to fetch blog content.</param>
-public class BlogService(HttpClient httpClient)
+public class BlogService(HttpClient httpClient) : IBlogService
 {
     /// <summary>
     /// Fetches blog content from the specified slug and extracts the first paragraph.

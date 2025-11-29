@@ -6,7 +6,7 @@ namespace GitHubModelsPlayground.ApiService;
 /// Service for summarizing blog content using AI-powered chat completion.
 /// </summary>
 /// <param name="chatClient">The AI chat client used to generate summaries.</param>
-public class BlogSummarizer(IChatClient chatClient)
+public class BlogSummarizer(IChatClient chatClient) : IBlogSummarizer
 {
     /// <summary>
     /// Generates a concise two-sentence summary of the provided blog content using AI.
