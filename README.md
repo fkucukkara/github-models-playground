@@ -191,26 +191,27 @@ After starting the application:
 GitHubModelsPlayground/
 ├── src/
 │   ├── GitHubModelsPlayground.ApiService/
-│   │   ├── BlogService.cs              # HTTP client for fetching blog content
-│   │   ├── IBlogService.cs             # Interface for blog service
-│   │   ├── BlogSummarizer.cs           # AI-powered summarization service
-│   │   ├── IBlogSummarizer.cs          # Interface for summarization service
-│   │   ├── Program.cs                  # API configuration and endpoints
-│   │   ├── appsettings.json            # Application configuration
+│   │   ├── Services/
+│   │   │   ├── BlogService.cs              # HTTP client for fetching blog content
+│   │   │   ├── IBlogService.cs             # Interface for blog service
+│   │   │   ├── BlogSummarizer.cs           # AI-powered summarization service
+│   │   │   └── IBlogSummarizer.cs          # Interface for summarization service
+│   │   ├── Program.cs                      # API configuration and endpoints
+│   │   ├── appsettings.json                # Application configuration
 │   │   ├── GitHubModelsPlayground.ApiService.http  # HTTP request examples
 │   │   └── GitHubModelsPlayground.ApiService.csproj
 │   ├── GitHubModelsPlayground.AppHost/
-│   │   ├── AppHost.cs                  # Aspire orchestration setup
-│   │   ├── appsettings.json            # Host configuration
+│   │   ├── AppHost.cs                      # Aspire orchestration setup
+│   │   ├── appsettings.json                # Host configuration
 │   │   └── GitHubModelsPlayground.AppHost.csproj
 │   └── GitHubModelsPlayground.ServiceDefaults/
-│       ├── Extensions.cs               # Shared service extensions
+│       ├── Extensions.cs                   # Shared service extensions
 │       └── GitHubModelsPlayground.ServiceDefaults.csproj
 ├── .gitignore
 ├── LICENSE
 ├── README.md
 ├── CONTRIBUTING.md
-└── GitHubModelsPlayground.slnx         # Solution file
+└── GitHubModelsPlayground.slnx             # Solution file
 ```
 
 ## 🔑 Key Concepts

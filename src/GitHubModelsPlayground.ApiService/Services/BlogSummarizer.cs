@@ -1,6 +1,6 @@
 using Microsoft.Extensions.AI;
 
-namespace GitHubModelsPlayground.ApiService;
+namespace GitHubModelsPlayground.ApiService.Services;
 
 /// <summary>
 /// Service for summarizing blog content using AI-powered chat completion.

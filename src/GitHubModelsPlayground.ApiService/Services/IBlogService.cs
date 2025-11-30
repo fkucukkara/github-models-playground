@@ -1,4 +1,4 @@
-namespace GitHubModelsPlayground.ApiService;
+namespace GitHubModelsPlayground.ApiService.Services;
 
 /// <summary>
 /// Defines the contract for fetching and parsing blog content from external sources.

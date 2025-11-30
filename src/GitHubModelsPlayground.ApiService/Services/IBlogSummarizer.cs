@@ -1,4 +1,4 @@
-namespace GitHubModelsPlayground.ApiService;
+namespace GitHubModelsPlayground.ApiService.Services;
 
 /// <summary>
 /// Defines the contract for summarizing blog content using AI-powered chat completion.

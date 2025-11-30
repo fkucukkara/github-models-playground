@@ -1,4 +1,4 @@
-namespace GitHubModelsPlayground.ApiService;
+namespace GitHubModelsPlayground.ApiService.Services;
 
 using System.Net.Http;
 using System.Text.RegularExpressions;

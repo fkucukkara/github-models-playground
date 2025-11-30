@@ -1,4 +1,4 @@
-using GitHubModelsPlayground.ApiService;
+using GitHubModelsPlayground.ApiService.Services;
 using Microsoft.Extensions.AI;
 
 var builder = WebApplication.CreateBuilder(args);
