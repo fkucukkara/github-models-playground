@@ -67,11 +67,11 @@ This project demonstrates:
 ### Prerequisites
 
 - [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0) or later
-- [Visual Studio 2025](https://visualstudio.microsoft.com/) or [VS Code](https://code.visualstudio.com/) with C# extension
+- [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
 - [GitHub Personal Access Token](https://github.com/settings/tokens) with access to GitHub Models
-- [.NET Aspire workload](https://learn.microsoft.com/dotnet/aspire/fundamentals/setup-tooling)
+- [Azure Subscription](https://azure.microsoft.com/free/) (for deployment)
 
-### Installation
+### Local Development
 
 1. **Clone the repository**
    ```bash
@@ -79,65 +79,60 @@ This project demonstrates:
    cd GitHubModelsPlayground
    ```
 
-2. **Install .NET Aspire workload** (if not already installed)
-   ```bash
-   dotnet workload install aspire
-   ```
-
-3. **Set up GitHub Models access**
+2. **Set up GitHub Models access**
    
-   You need to configure your GitHub Personal Access Token (PAT) for accessing GitHub Models:
+   Configure your GitHub Personal Access Token (PAT):
 
-   **Option 1: Using User Secrets (Recommended for development)**
    ```bash
    cd src/GitHubModelsPlayground.AppHost
-   dotnet user-secrets init
    dotnet user-secrets set "GitHub:Token" "your-github-pat-token-here"
-   ```
-
-   **Option 2: Using Environment Variable**
-   ```bash
-   # Windows (PowerShell)
-   $env:GITHUB_TOKEN = "your-github-pat-token-here"
-
-   # Linux/macOS
-   export GITHUB_TOKEN="your-github-pat-token-here"
    ```
 
    **How to get a GitHub PAT:**
    - Go to [GitHub Settings > Developer settings > Personal access tokens](https://github.com/settings/tokens)
-   - Click "Generate new token (classic)"
-   - Select scopes (for GitHub Models, you typically need basic repo access)
-   - Copy the generated token
+   - Generate a new token with access to GitHub Models
 
-4. **Restore dependencies**
+3. **Run locally**
    ```bash
-   dotnet restore
+   cd src/GitHubModelsPlayground.AppHost
+   dotnet run
    ```
 
-5. **Build the solution**
+   The Aspire Dashboard will open automatically in your browser.
+
+### Deploy to Azure
+
+This project uses Azure Developer CLI (azd) for seamless deployment to Azure Container Apps.
+
+1. **Initialize azd (first time only)**
    ```bash
-   dotnet build
+   azd init
    ```
 
-### Running the Application
+2. **Provision and deploy**
+   ```bash
+   azd up
+   ```
 
-#### Using Visual Studio
-1. Open `GitHubModelsPlayground.slnx`
-2. Set `GitHubModelsPlayground.AppHost` as the startup project
-3. Press F5 or click "Run"
-4. The Aspire Dashboard will open in your browser
+   This single command will:
+   - Provision Azure resources (Container Apps, Container Registry, etc.)
+   - Build and containerize the application
+   - Deploy to Azure Container Apps
+   - Configure environment variables
 
-#### Using Command Line
-```bash
-cd src/GitHubModelsPlayground.AppHost
-dotnet run
-```
+3. **Set GitHub token for Azure deployment**
+   ```bash
+   azd env set GITHUB_TOKEN "your-github-pat-token-here"
+   azd deploy
+   ```
 
-#### Using VS Code
-1. Open the workspace folder
-2. Press F5 or use the "Run and Debug" panel
-3. Select ".NET Core Launch (web)"
+### Deployment Architecture
+
+The application deploys to Azure Container Apps with:
+- **Automatic scaling** based on load
+- **Managed identity** for secure access
+- **Built-in observability** with Application Insights
+- **HTTPS endpoint** automatically provisioned
 
 ### Using the API
 
