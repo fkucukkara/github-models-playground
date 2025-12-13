@@ -10,7 +10,8 @@ var blogService = builder.AddExternalService("aspire-blog", "https://aspire.dev/
 // This connects to GitHub's hosted GPT-4o-mini model
 var aiModel = builder.AddGitHubModel("ai-model", GitHubModel.OpenAI.OpenAIGpt4oMini);
 
-var apiService = builder.AddProject<Projects.GitHubModelsPlayground_ApiService>("apiservice")
+var apiService = builder.AddProject<Projects.GitHubModelsPlayground_ApiService>("apiservice", "https")
+    .WithExternalHttpEndpoints()
     .WithHttpHealthCheck("/health")
     .WithReference(blogService)
     .WithReference(aiModel);
