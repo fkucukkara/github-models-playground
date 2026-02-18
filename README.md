@@ -75,8 +75,8 @@ This project demonstrates:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/GitHubModelsPlayground.git
-   cd GitHubModelsPlayground
+   git clone https://github.com/fkucukkara/github-models-playground.git
+   cd github-models-playground
    ```
 
 2. **Set up GitHub Models access**
