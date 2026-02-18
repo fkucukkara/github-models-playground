@@ -28,8 +28,10 @@ builder.AddAzureChatCompletionsClient("ai-model")
 builder.Services.AddScoped<IBlogSummarizer, BlogSummarizer>();
 
 var app = builder.Build();
+
 app.UseExceptionHandler();
 app.UseStatusCodePages();
+
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
